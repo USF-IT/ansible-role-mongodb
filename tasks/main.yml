@@ -15,7 +15,8 @@
 - name: Copy the configuration file
   template: src=mongod.conf.j2 dest=/etc/mongod.conf
   notify: restart mongod
-
+- debug:
+    msg: "SELINUX config is {{ mongo_selinux_configure }}"
 - block:
   - name: Check if MongoDB port is already configured
     shell: semanage port -l | grep {{ mongo_net.port }}
