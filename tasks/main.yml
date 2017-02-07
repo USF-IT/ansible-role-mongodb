@@ -1,4 +1,6 @@
 ---
+- debug:
+    msg: "Oauth key is {{ composer_github_oauth_token }}"
 - name: Create the MongoDB repo file
   copy: src=mongodb.repo dest=/etc/yum.repos.d/mongodb-org-3.0.repo
 
