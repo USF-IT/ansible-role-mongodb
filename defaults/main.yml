@@ -17,4 +17,4 @@ mongo_db:
     path: /var/lib/mongo
     
 # Selinux
-mongo_selinux_configure: true
+mongo_selinux_configure: false
