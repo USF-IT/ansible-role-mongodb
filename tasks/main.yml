@@ -1,8 +1,14 @@
 ---
-- debug:
-    msg: "Oauth key is {{ composer_github_oauth_token }}"
-- name: Create the MongoDB repo file
-  copy: src=mongodb.repo dest=/etc/yum.repos.d/mongodb-org-3.0.repo
+- name: Add Mongo Repo
+  yum_repository:
+    name: "[mongodb-org-{{ mongo_version | regex_replace('^([0-9])\\.([0-9]*).*', '\\1.\\2') }}]"
+    description: MongoDB Repository
+    baseurl: "https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/{{ mongo_version | regex_replace('^([0-9])\\.([0-9]*).*', '\\1.\\2') }}/x86_64/"
+    gpgkey: "https://www.mongodb.org/static/pgp/server-{{ mongo_version | regex_replace('^([0-9])\\.([0-9]*).*', '\\1.\\2') }}.asc"
+    gpgcheck: yes
+    enabled: yes
+#- name: Create the MongoDB repo file
+#  copy: src=mongodb.repo dest=/etc/yum.repos.d/mongodb-org-3.0.repo
 
 - name: Install MongoDB
   yum: "name={{ item }} state=present"

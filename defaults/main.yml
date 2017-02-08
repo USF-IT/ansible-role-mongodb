@@ -1,6 +1,6 @@
 ---
 # Version to be installed, must be >= 2.6
-mongo_version: 3.0.1
+mongo_version: 3.2.11
 
 # Network
 mongo_net:
