@@ -7,6 +7,11 @@
     gpgkey: "https://www.mongodb.org/static/pgp/server-{{ mongo_version | regex_replace('^([0-9])\\.([0-9]*).*', '\\1.\\2') }}.asc"
     gpgcheck: yes
     enabled: yes
+- name: import gpg-keys
+  command: rpm --import $item
+  with_items: 
+    - "https://www.mongodb.org/static/pgp/server-{{ mongo_version | regex_replace('^([0-9])\\.([0-9]*).*', '\\1.\\2') }}.asc"
+  ignore_errors: True    
 #- name: Create the MongoDB repo file
 #  copy: src=mongodb.repo dest=/etc/yum.repos.d/mongodb-org-3.0.repo
 
